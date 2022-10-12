@@ -177,7 +177,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   );
 
   const data = await res.json();
-  const currency = Object.values(data[0].currencies);
+  const currency:{name:string}[] = Object.values(data[0].currencies);
   const language = Object.values(data[0].languages).join(", ");
 
   const newObj = {
@@ -188,7 +188,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     subRegion: data[0]?.subregion,
     capital: data[0]?.capital[0] === undefined ? "" : data[0].capital[0],
     topLevelDomain: data[0]?.tld.join(", "),
-    currency: currency[0]?.name,
+    currency: currency[0].name,
     language: language,
     flag: data[0]?.flags?.png,
   };
